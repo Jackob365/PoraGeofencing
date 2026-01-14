@@ -133,7 +133,6 @@ class GeofenceBroadcastReceiver : BroadcastReceiver() {
 |------------------------|------------------------|
 | ![Lokacija](screenshots/location.png) | ![Glavni Zaslon](screenshots/main.png) |
 | Dovoljenje za lokacijo | Obvestilo |
-|------------------------|---------------|
 | ![Dodajenje](screenshots/dodajanje.png) | ![Obvestilo](screenshots/obvestilo.png) |
 
 ## Izjeme 
