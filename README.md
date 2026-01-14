@@ -74,7 +74,7 @@ fun addGeofence(latitude: Double, longitude: Double, radius: Float) {
 
     val geofence = Geofence.Builder()
         .setRequestId("DEMO_GEOFENCE") //id je string da lahko prepoznamo ta geofence
-        .setCircularRegion(latitude, longitude, radius) //dodamo regijo okoli geofnece
+        .setCircularRegion(latitude, longitude, radius) //dodamo regijo okoli geofnece, regija je lahko zal samo krog
         .setExpirationDuration(Geofence.NEVER_EXPIRE) //geofence se po dolocenem casu lahko sama odstrani
         .setTransitionTypes(
             Geofence.GEOFENCE_TRANSITION_ENTER or //kdaj se sprozi alert
