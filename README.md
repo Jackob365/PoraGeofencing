@@ -129,9 +129,75 @@ class GeofenceBroadcastReceiver : BroadcastReceiver() {
 
 ## Posnetki zaslona
 
-| Lastnost | Ocena |
-|--------|------|
-| Časovna zahtevnost | O(1) na dogodek |
-| Prostorska zahtevnost | O(n), kjer je n število geofence-ov |
-| Poraba baterije | nizka |
-| Poraba pomnilnika | zanemarljiva |
+| Dovoljenje za lokacijo | Glavni zaslon |
+|------------------------|------------------------|
+| ![Lokacija](screenshots/location.png) | ![Glavni Zaslon](screenshots/main.png) |
+| Dovoljenje za lokacijo | Obvestilo |
+|------------------------|---------------|
+| ![Dodajenje](screenshots/dodajanje.png) | ![Obvestilo](screenshots/obvestilo.png) |
+
+## Izjeme 
+### 1. Manjkajoča dovoljenja
+```kotlin
+try {
+    geofencingClient.addGeofences(geofencingRequest, geofencePendingIntent)
+} catch (e: SecurityException) {
+    // Uporabnik ni odobril potrebnih dovoljenj
+    Log.e("Geofence", "Dovoljenja za lokacijo niso odobrena", e)
+    // Preusmeri uporabnika na prošnjo za dovoljenja
+    requestLocationPermissions()
+}
+```
+### 2. izklopljene lokacijske storitve
+```kotlin
+ val task = settingsClient.checkLocationSettings(builder.build())
+  task.addOnFailureListener { exception ->
+      if (exception is ResolvableApiException) {
+          // Lokacijske storitve so onemogočene
+          try {
+              exception.startResolutionForResult(
+                  this,
+                  REQUEST_CHECK_SETTINGS
+              )
+          } catch (sendEx: IntentSender.SendIntentException) {
+              Log.e("Location", "Napaka pri prikazu dialoga", sendEx)
+          }
+      }
+  }
+```
+
+### 3. Napaka Google Play Services
+```kotlin
+ fun ensurePlayServices(activity: Activity): Boolean {
+    val api = GoogleApiAvailability.getInstance()
+    val status = api.isGooglePlayServicesAvailable(activity)
+
+    if (status == ConnectionResult.SUCCESS) return true
+
+    if (api.isUserResolvableError(status)) {
+        api.getErrorDialog(activity, status, 1001)?.show()  // ponudi update/install
+    }
+    return false
+}
+```
+
+### 4. Preseženo število geofence
+```kotlin
+ fun replaceGeofence(
+    geofencingClient: GeofencingClient,
+    request: GeofencingRequest,
+    pendingIntent: PendingIntent
+) {
+    geofencingClient.removeGeofences(pendingIntent)
+        .addOnCompleteListener {
+            geofencingClient.addGeofences(request, pendingIntent)
+        }
+}
+```
+
+## Uporaba v nalogi
+Geofence sem uporabil pri nalogi. Naslov moje naloge je Kulturni vodič, kjer lahko uporabnik preko aplikacije spremlja različne muzeje, galerije in arhive. Geofence je za to nalogo se posebej primeren, saj so velikokrat manjsi muzeji ali rastave skrite. S pomočjo Geofence pa lahko uporabnika opozorim da se približuje ali da je v bljižini kakšne zanimivosti.
+
+| Zemljevid | Obvestilo-vhod | Obvestilo-izhod |
+|------------------------|------------------------|------------------------|
+| ![Zemljevid](screenshots/zemljevid.png) | ![Obvestilo](screenshots/obvestiloVodic.png) | ![Obvestilo](screenshots/obvestilo2.png) |
