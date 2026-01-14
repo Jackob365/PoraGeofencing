@@ -1,7 +1,110 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-             android:orientation="vertical"
-             android:layout_width="match_parent"
-             android:layout_height="match_parent">
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true">
 
-</LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <TextView
+            android:id="@+id/titleText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Geofencing Demo"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            android:paddingBottom="12dp" />
+
+        <!-- Current location -->
+        <TextView
+            android:id="@+id/locationText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Lokacija: -"
+            android:textSize="16sp"
+            android:paddingBottom="8dp" />
+
+        <!-- Geofence status -->
+        <TextView
+            android:id="@+id/statusText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Ni aktivnih geofence-ov"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:paddingBottom="16dp" />
+
+        <!-- Radius label row -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:paddingBottom="4dp">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Radij geofence-a"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/radiusValueText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="100 m"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <!-- Radius slider -->
+        <com.google.android.material.slider.Slider
+            android:id="@+id/radiusSlider"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:valueFrom="50"
+            android:valueTo="500"
+            android:stepSize="10"
+            android:value="100"
+            app:labelBehavior="gone"
+            android:paddingBottom="20dp" />
+
+        <!-- Buttons -->
+        <Button
+            android:id="@+id/addGeofenceButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Dodaj geofence (trenutna lokacija)" />
+
+        <Button
+            android:id="@+id/removeGeofenceButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Odstrani geofence"
+            android:layout_marginTop="10dp" />
+
+        <Button
+            android:id="@+id/testNotificationButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Test obvestilo"
+            android:layout_marginTop="10dp" />
+
+        <!-- Small help text -->
+        <TextView
+            android:id="@+id/helpText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Namig: Geofence se doda na trenutno lokacijo. Premakni se izven radija in nazaj, da vidiš ENTER/EXIT dogodek."
+            android:textSize="14sp"
+            android:paddingTop="16dp" />
+
+    </LinearLayout>
+</ScrollView>

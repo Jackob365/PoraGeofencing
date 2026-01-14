@@ -1,3 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Geofencing</string>
+    <string name="app_name">Geofencing API Demo</string>
+    <string name="app_title">Geofencing API Demo</string>
+
+    <string name="current_location">Trenutna lokacija</string>
+    <string name="location_unknown">Lokacija ni znana</string>
+    <string name="location_format">Lat: %.6f, Lon: %.6f</string>
+
+    <string name="geofence_radius">Polmer za geofence (m)</string>
+    <string name="radius_100m">100 m</string>
+    <string name="radius_format">%d m</string>
+
+    <string name="geofence_status">Status</string>
+    <string name="no_geofences">Ni aktivnih geofencev</string>
+    <string name="geofence_active_with_coords">Geofence aktiven (r = %1$d m) @ %2$s, %3$s</string>
+
+    <string name="add_geofence">Dodaj geofence na trenutni lokaciji</string>
+    <string name="remove_geofences">Odstrani vse geofence</string>
+    <string name="test_notification">Testiraj obvestilo</string>
+
+    <string name="info_text">Premaknite se vsaj 100m stran, da preizkusite vstop/izstop iz geofenca</string>
+
+    <string name="geofence_enter_title">Vstop v geofence</string>
+    <string name="geofence_enter_message">Vstopili ste v območje geofence</string>
+    <string name="geofence_exit_title">Izstop iz geofence</string>
+    <string name="geofence_exit_message">Zapustili ste območje geofence</string>
+    <string name="test_notification_title">Testno obvestilo</string>
+    <string name="test_notification_message">Trenutna lokacija: %1$.5f, %2$.5f</string>
+
+    <string name="geofence_added">Geofence uspešno dodan!</string>
+    <string name="geofence_removed">Geofenci odstranjeni</string>
+    <string name="geofence_error">Napaka pri geofence: %s</string>
+    <string name="location_permission_denied">Dovoljenje za lokacijo zavrnjeno</string>
+    <string name="background_location_permission_denied">Dovoljenje za lokacijo v ozadju ni odobreno.</string>
+    <string name="location_unavailable">Lokacija ni na voljo</string>
+    <string name="notification_permission_denied">Dovoljenje za obvestila zavrnjeno</string>
+
+    <string name="geofence_channel_name">Geofence obvestila</string>
+    <string name="geofence_channel_description">Obvestila za vstop/izstop iz geofence območij</string>
 </resources>
